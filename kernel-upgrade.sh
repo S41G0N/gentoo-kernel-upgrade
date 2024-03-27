@@ -8,9 +8,11 @@ GRUB_CONFIG_PATH=/boot/grub/grub.cfg
 # Automatically determine the current and new kernel versions
 CURRENT_KERNEL=$(uname -r)
 NEW_KERNEL_VERSION=$(eselect kernel list | tail -n 1 | awk -F'[- ]' '{print $(NF-1)"-"$NF}')
+echo "$NEW_KERNEL_VERSION"
 
 # Select the latest kernel version
 NEW_KERNEL_SELECTION=$(eselect kernel list | tail -n 1 | awk -F'[][]' '{print $2}')
+echo "$NEW_KERNEL_SELECTION"
 eselect kernel set $NEW_KERNEL_SELECTION
 
 # Path adjustments
@@ -34,7 +36,7 @@ NUM_JOBS=$(nproc)
 make -j"$NUM_JOBS" && make modules_install && make install
 
 # Update the initial ramdisk and Grub configuration
-dracut --kver $NEW_KERNEL_VERSION
+dracut --kver $NEW_KERNEL_VERSION --force
 grub-mkconfig -o "$GRUB_CONFIG_PATH"
 
 echo "Kernel update to version $NEW_KERNEL_VERSION completed successfully."
