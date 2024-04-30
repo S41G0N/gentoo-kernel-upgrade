@@ -13,6 +13,13 @@ echo "$NEW_KERNEL_VERSION"
 # Select the latest kernel version
 NEW_KERNEL_SELECTION=$(eselect kernel list | tail -n 1 | awk -F'[][]' '{print $2}')
 echo "$NEW_KERNEL_SELECTION"
+
+# Check if the newest kernel has already been selected
+if echo "$NEW_KERNEL_SELECTION" | grep -q '*'; then
+    echo "The newest kernel has already been selected."
+    exit 1
+fi
+
 eselect kernel set $NEW_KERNEL_SELECTION
 
 # Path adjustments
