@@ -1,6 +1,6 @@
 #!/bin/bash
 ## Path to the script you want to manage
-SCRIPT_NAME="kernel-upgrade-custom.sh"
+SCRIPT_NAME="kernel-upgrade-custom.py"
 TARGET_DIR="/usr/local/bin"
 TARGET_PATH="${TARGET_DIR}/${SCRIPT_NAME}"
 
