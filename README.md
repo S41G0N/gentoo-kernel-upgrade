@@ -16,6 +16,7 @@ It only applies to those who have built their kernel from source using "sys-kern
 ```
 git clone https://gitlab.com/SA1G0N/gentoo-kernel-upgrade-script.git
 cd gentoo-kernel-upgrade-script
-sudo sh kernel-upgrade.sh
+sudo sh install.sh
+sudo kernel-upgrade.py
 ```
 
