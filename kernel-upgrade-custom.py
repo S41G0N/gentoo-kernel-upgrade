@@ -13,12 +13,12 @@ GRUB_CONFIG_PATH = "/boot/grub/grub.cfg"
 def run_command(command):
     """Run a shell command and print the output in real-time."""
     process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-    
+
     if process.stdout:
         for line in iter(process.stdout.readline, ''):
             print(line, end='')
         process.stdout.close()
-    
+
     if process.stderr:
         for line in iter(process.stderr.readline, ''):
             print(line, end='')
