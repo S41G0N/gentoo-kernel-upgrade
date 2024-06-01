@@ -10,24 +10,28 @@ LINUX_PATH = "/usr/src/linux"
 CONFIG_FILE = ".config"
 GRUB_CONFIG_PATH = "/boot/grub/grub.cfg"
 
+
 def run_command(command):
     """Run a shell command and print the output in real-time."""
-    process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    process = subprocess.Popen(
+        command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
+    )
 
     if process.stdout:
-        for line in iter(process.stdout.readline, ''):
-            print(line, end='')
+        for line in iter(process.stdout.readline, ""):
+            print(line, end="")
         process.stdout.close()
 
     if process.stderr:
-        for line in iter(process.stderr.readline, ''):
-            print(line, end='')
+        for line in iter(process.stderr.readline, ""):
+            print(line, end="")
         process.stderr.close()
 
     returncode = process.wait()
     if returncode != 0:
         print(f"Command failed: {command}")
         exit(1)
+
 
 def get_command_output(command):
     """Run a shell command and return the output."""
@@ -37,18 +41,23 @@ def get_command_output(command):
         exit(1)
     return result.stdout.strip()
 
+
 def main():
     # Automatically determine the current and new kernel versions
     current_kernel = get_command_output("uname -r")
-    new_kernel_version = get_command_output("eselect kernel list | tail -n 1 | awk -F'[- ]' '{print $(NF-1)\"-\"$NF}'")
+    new_kernel_version = get_command_output(
+        "eselect kernel list | tail -n 1 | awk -F'[- ]' '{print $(NF-1)\"-\"$NF}'"
+    )
     print(new_kernel_version)
 
     # Select the latest kernel version
-    new_kernel_selection = get_command_output("eselect kernel list | tail -n 1 | awk -F'[][]' '{print $2}'")
+    new_kernel_selection = get_command_output(
+        "eselect kernel list | tail -n 1 | awk -F'[][]' '{print $2}'"
+    )
     print(new_kernel_selection)
 
     # Check if the newest kernel has already been selected
-    if '*' in new_kernel_selection:
+    if "*" in new_kernel_selection:
         print("The newest kernel has already been selected.")
         exit(1)
 
@@ -79,6 +88,6 @@ def main():
 
     print(f"Kernel update to version {new_kernel_version} completed successfully.")
 
+
 if __name__ == "__main__":
     main()
-
