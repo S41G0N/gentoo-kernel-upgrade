@@ -1,5 +1,7 @@
 # Gentoo Kernel Upgrade Script
 
+![Upgrade Script GIF](img/kernel-upgrade.gif)
+
 
 ## Why was this script created
 
