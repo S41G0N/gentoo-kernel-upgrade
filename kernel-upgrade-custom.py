@@ -45,23 +45,26 @@ def get_command_output(command):
 def main():
     # Automatically determine the current and new kernel versions
     current_kernel = get_command_output("uname -r")
-    new_kernel_version = get_command_output(
-        "eselect kernel list | tail -n 1 | awk -F'[- ]' '{print $(NF-1)\"-\"$NF}'"
-    )
-    print(new_kernel_version)
+    print(f"CURRENT KERNEL VERSION: {current_kernel}")
 
-    # Select the latest kernel version
-    new_kernel_selection = get_command_output(
+    # Get latest kernel number
+    new_kernel_number = get_command_output(
         "eselect kernel list | tail -n 1 | awk -F'[][]' '{print $2}'"
     )
-    print(new_kernel_selection)
+    print(f"NEW KERNEL NUMBER: {new_kernel_number}")
 
-    # Check if the newest kernel has already been selected
-    if "*" in new_kernel_selection:
-        print("The newest kernel has already been selected.")
-        exit(1)
+    #Get latest kernel version
+    new_kernel_version = (
+        get_command_output("eselect kernel list | tail -n 1").split("-", 1)[1]
+    )
 
-    run_command(f"eselect kernel set {new_kernel_selection}")
+    if '*' in new_kernel_version:
+        new_kernel_version = new_kernel_version.split(' ')[0]
+
+    print(f"NEW KERNEL VERSION: {new_kernel_version}")
+
+    run_command(f"eselect kernel set {new_kernel_number}")
+    print("NEW KERNEL VERSION SYMLINKED")
 
     # Path adjustments
     new_kernel_path = f"{LINUX_PATH}-{new_kernel_version}"

@@ -6,6 +6,8 @@
 ## Why was this script created
 
 This script was written to simplify the process of manually upgrading your kernel in Gentoo Linux.
+It should be useful to those who do not want to compile their kernel automatically during system updates via 'emerge -avuDN @world',
+but would rather reserve the ability to compile their kernel later.
 
 It only applies to those who have built their kernel from source using "sys-kernel/gentoo-sources", any other kernels such as "genkernel" or distribution kernels should not be used with this script.
 
