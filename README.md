@@ -1,23 +1,28 @@
 # Gentoo Kernel Upgrade Script
 
-![Upgrade Script GIF](img/kernel-upgrade.gif)
+![Upgrade Script Demo](img/kernel-upgrade.gif)
 
+## Introduction
 
-## Why was this script created
+This script streamlines the process of manually upgrading your kernel in Gentoo Linux. It's designed for users who prefer to compile their kernel separately from system updates, rather than automatically during `emerge -avuDN @world`.
 
-This script was written to simplify the process of manually upgrading your kernel in Gentoo Linux.
-It should be useful to those who do not want to compile their kernel automatically during system updates via 'emerge -avuDN @world',
-but would rather reserve the ability to compile their kernel later.
+## Target Audience
 
-It only applies to those who have built their kernel from source using "sys-kernel/gentoo-sources", any other kernels such as "genkernel" or distribution kernels should not be used with this script.
+This tool is ideal for Gentoo users who:
+- Build their kernel from source using `sys-kernel/gentoo-sources`
+- Prefer manual control over kernel compilation timing
+- Want to simplify the kernel upgrade process
 
-## Requirements
-* GRUB Bootloader (config path set to "/boot/grub/grub.cfg")
-* Dracut initramfs generator
+**Note:** This script is not intended for use with `genkernel` or distribution kernels.
 
-## How to use
+## Prerequisites
 
-```
+- GRUB Bootloader (config path: `/boot/grub/grub.cfg`)
+- Dracut initramfs generator
+
+## How to Install & Run
+
+```bash
 git clone https://gitlab.com/SA1G0N/gentoo-kernel-upgrade-script.git
 cd gentoo-kernel-upgrade-script
 sudo sh install.sh
