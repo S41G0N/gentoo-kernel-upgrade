@@ -5,7 +5,6 @@ import shutil
 import multiprocessing
 import argparse
 import logging
-from typing import List, Tuple
 
 # Define constants
 LINUX_PATH = "/usr/src/linux"
